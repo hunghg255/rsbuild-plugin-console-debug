@@ -15,25 +15,7 @@ npm i rsbuild-plugin-console-debug -D
 // rsbuild.config.ts
 import { pluginConsoleDebug } from 'rsbuild-plugin-console-debug';
 
-// install launch-editor-middleware
-import launchEditorMiddleware from 'launch-editor-middleware';
-
 export default defineConfig({
-   dev: {
-    setupMiddlewares: [
-      ({ unshift }, server) => {
-        unshift((req, res, next) => {
-          if (req.url.startsWith('/__open-in-editor')) {
-            launchEditorMiddleware()(req, res, next);
-            return;
-          }
-
-          next();
-        });
-      },
-    ],
-  },
-
   plugins: [
     pluginConsoleDebug(),
   ],
@@ -47,8 +29,6 @@ Example: [`playground/`](./playground/)
 ## Reference
 
 - [Rsbuild](https://rsbuild.dev/)
-
-- [launch-editor](https://github.com/yyx990803/launch-editor)
 
 ## Demo
 
