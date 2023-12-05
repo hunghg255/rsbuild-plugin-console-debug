@@ -1,9 +1,9 @@
 {
   "name": "rsbuild-plugin-console-debug",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "📦 📦 rsbuild plugin console debug",
   "scripts": {
-    "build": "tsup && cp -r ./src/core ./dist",
+    "build": "tsup && cp -r ./src/core ./dist && cp -r ./src/client ./dist",
     "dev": "tsup --watch src",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -43,7 +43,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@rsbuild/core": "^0.0.25",
+    "@rsbuild/core": "^0.1.6",
     "@types/node": "^20.8.8",
     "bumpp": "^9.2.0",
     "eslint": "^8.52.0",
@@ -62,8 +62,8 @@
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@rsbuild/shared": "^0.0.17",
-    "boxen": "^7.1.1",
-    "hqr": "^0.0.1",
-    "kolorist": "^1.8.0"
+    "h3": "^1.9.0",
+    "launch-editor-middleware": "^2.6.1",
+    "serve-static": "^1.15.0"
   }
 }
