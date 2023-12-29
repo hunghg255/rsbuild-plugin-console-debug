@@ -17,8 +17,7 @@
     "@rsbuild/plugin-react": "^0.0.20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "launch-editor-middleware": "^2.6.1",
-    "rsbuild-plugin-console-debug": "^0.0.4",
+    "rsbuild-plugin-console-debug": "^0.0.6",
     "typescript": "^5.2.2"
   }
 }
