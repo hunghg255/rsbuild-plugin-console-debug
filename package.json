@@ -1,6 +1,6 @@
 {
   "name": "rsbuild-plugin-console-debug",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "📦 📦 rsbuild plugin console debug",
   "scripts": {
     "build": "tsup && cp -r ./src/core ./dist && cp -r ./src/client ./dist",
