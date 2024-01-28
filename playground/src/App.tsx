@@ -5,6 +5,10 @@ const HelloWorld = () => {
 
   useEffect(() => {
     console.log('HelloWorld mounted');
+    console.log({
+      a: 1,
+    });
+
     return () => {
       console.log('HelloWorld unmounted');
     };

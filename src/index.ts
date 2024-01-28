@@ -9,7 +9,10 @@ export const pluginConsoleDebug = (): RsbuildPlugin => {
   return {
     name: 'rsbuild-plugin-console-debug',
     setup(api) {
-      if (api.context.bundlerType === 'webpack' || process.env.NODE_ENV !== 'development') {
+      if (
+        api.context.bundlerType === 'webpack' ||
+        process.env.NODE_ENV !== 'development'
+      ) {
         return;
       }
 
@@ -22,7 +25,7 @@ export const pluginConsoleDebug = (): RsbuildPlugin => {
           .rule(utils.CHAIN_ID.RULE.TS)
           .test(/\.(tsx|ts)$/i)
           .use(utils.CHAIN_ID.RULE.TS)
-          .loader(resolvePackage('./core/applyConcoleDebug.js', __dirname))
+          .loader(resolvePackage('./core/applyConsoleDebug.js', __dirname))
           .options({
             port: PORT,
           })

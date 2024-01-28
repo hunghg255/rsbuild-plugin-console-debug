@@ -9,7 +9,7 @@
     "format": "prettier --write .",
     "play": "npm -C playground run dev",
     "prepublishOnly": "npm run build",
-    "release": "bumpp -r",
+    "release": "bumpp -r && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest"
   },

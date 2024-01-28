@@ -1,4 +1,3 @@
-
 const { parseSync, traverse } = require('@babel/core');
 const { composeConsoleLog } = require('./composeConsoleLog');
 const path = require('path');
@@ -10,10 +9,7 @@ module.exports = function (content) {
   const { port } = this.getOptions();
   const id = this.resourcePath;
   const projectDir = path.join(process.cwd());
-  const fileRelativePath = id.replace(
-    projectDir.replace(/\\/g, '/'),
-    '',
-  );
+  const fileRelativePath = id.replace(projectDir.replace(/\\/g, '/'), '');
 
   const ast = parseSync(content, {
     configFile: false,
@@ -34,14 +30,11 @@ module.exports = function (content) {
         node.property.name === 'log'
       ) {
         const c = composeConsoleLog({
-          prefix: '',
-          suffix: '',
           fileRelativePath,
           fileAbsolutePath: id,
           lineCount: node.loc.start.line,
           endCloumn: node.property.loc.end.column,
           port: port,
-          jump: true,
         });
 
         s.appendLeft(node.start + 12, c);

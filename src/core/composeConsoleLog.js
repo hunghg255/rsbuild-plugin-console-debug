@@ -3,62 +3,11 @@ const middlewareName = 'client';
 
 /**
  *
- * @returns {string}
- */
-function generateTime() {
-  const date = new Date();
-  const hour = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
-  const minutes =
-    date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
-  const seconds =
-    date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds();
-  return `${hour}:${minutes}:${seconds}`;
-}
-
-/**
- *
- * @returns {string}
- */
-function generateLogTitle() {
-  return `"%c[CONSOLE-LINE - ${generateTime()}]:`;
-}
-
-/**
- *
- * @returns {string}
- */
-function generateLogTitleStyle() {
-  return `"color:#2EB086;padding:2px 5px;font-weight:700;"`;
-}
-
-/**
- *
  * @param {string} location
  * @returns {string}
  */
 function generateFileLocation(location) {
-  return `%cFile: ${location}  `;
-}
-
-/**
- *
- * @returns {string}
- */
-function generateFileLocationStyle() {
-  return `"color: #3AB4F2;"`;
-}
-
-/**
- *
- * @param {number}} lineCount
- * @returns {string}
- */
-function generateLine(lineCount) {
-  return `%cLine: ${lineCount}\\n`;
-}
-
-function generateLineStyle() {
-  return `"color: #F4CE14;"`;
+  return `%c 📜 ${location.split('/').pop()}`;
 }
 
 /**
@@ -68,73 +17,43 @@ function generateLineStyle() {
  * @returns {string}
  */
 function generateAddress(port, filePath) {
-  return `%cJump to: ${BaseURL + port}/${middlewareName}#${Buffer.from(filePath, 'utf-8').toString('base64')}\\n`;
+  return `%c 🚀 ${BaseURL + port}/${middlewareName}#${Buffer.from(
+    filePath,
+    'utf-8',
+  ).toString('base64')}`;
 }
 
-/**
- *
- * @returns {string}
- */
-function generateAddressStyle() {
-  return `"color: #6664C2;"`;
-}
+const getColor = (file) => {
+  if (file.includes('ts') || file.includes('tsx')) {
+    return 'background:#3fabf3;color:white;';
+  }
 
-/**
- *
- * @returns {string}
- */
-function generateNewLine() {
-  return '%c\\n"';
-}
+  if (file.includes('js') || file.includes('jsx')) {
+    return 'background:#f1e05a;color:black;';
+  }
 
-/**
- *
- * @returns {string}
- */
-function generateNewLineStyle() {
-  return `"color: inherit"`;
-}
+  return 'background:#80BCBD;color:black;';
+};
 
 /**
  * @param {Object} components
- * @param {string} components.prefix
- * @param {string} components.suffix
  * @param {string} components.fileRelativePath
  * @param {string} components.fileAbsolutePath
  * @param {number} components.lineCount
  * @param {number} components.endCloumn
  * @param {number|string} components.port
- * @param {boolean} components.jump
  * @returns {string}
  */
 module.exports.composeConsoleLog = function composeConsoleLog(components) {
-  const {
-    prefix,
-    suffix,
+  const { fileRelativePath, fileAbsolutePath, lineCount, endCloumn, port } =
+    components;
+
+  return `"${generateFileLocation(
     fileRelativePath,
-    fileAbsolutePath,
-    lineCount,
-    endCloumn,
+  )}:${lineCount} ${generateAddress(
     port,
-    jump,
-  } = components;
-  return `${
-    prefix +
-    generateLogTitle() +
-    generateFileLocation(fileRelativePath) +
-    generateLine(lineCount) +
-    (jump
-      ? generateAddress(
-          port,
-          encodeURIComponent(`${fileAbsolutePath}:${lineCount}:${endCloumn}`),
-        )
-      : '') +
-    `${generateNewLine()},` +
-    `${generateLogTitleStyle()},` +
-    `${generateFileLocationStyle()},` +
-    `${generateLineStyle()},` +
-    (jump ? `${generateAddressStyle()},` : '') +
-    `${generateNewLineStyle()},` +
-    suffix
-  }`;
-}
+    encodeURIComponent(`${fileAbsolutePath}:${lineCount}:${endCloumn}`),
+  )}", "${getColor(
+    fileRelativePath,
+  )}padding:4px 1px;border-radius:4px 0 0 4px;", "background:#607274;color:white;padding:4px 1px;border-radius:0 4px 4px 0;", \n`;
+};
