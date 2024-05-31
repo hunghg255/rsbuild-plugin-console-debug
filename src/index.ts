@@ -23,9 +23,9 @@ export const pluginConsoleDebug = (): RsbuildPlugin => {
 
       api.modifyBundlerChain(async (chain, utils) => {
         chain.module
-          .rule(utils.CHAIN_ID.RULE.JS)
-          .test(/\.(j|t)sx?$/)
-          .use(utils.CHAIN_ID.USE.TS)
+          .rule(utils.CHAIN_ID.RULE.TS)
+          .test(/\.(tsx|ts)$/i)
+          .use(utils.CHAIN_ID.RULE.TS)
           .loader(resolvePackage('./core/applyConsoleDebug.js', __dirname))
           .options({
             port,
